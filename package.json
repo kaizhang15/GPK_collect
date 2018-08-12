@@ -1,0 +1,24 @@
+{
+  "name": "gpk_collect",
+  "version": "1.0.0",
+  "description": "New Web UI with special game to collect users' gliding data.",
+  "main": "index.js",
+  "dependencies": {
+    "form-data": "^2.3.2",
+    "netlify-lambda": "^0.4.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kaizhang15/GPK_collect.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kaizhang15/GPK_collect/issues"
+  },
+  "homepage": "https://github.com/kaizhang15/GPK_collect#readme"
+}
