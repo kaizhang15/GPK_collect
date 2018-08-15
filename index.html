@@ -363,9 +363,9 @@
    function stop_input(){
     last = "";	
     setCookie(user_name, in_seq, 365);
-    console.log("username = " + getCookie('username'));
-    console.log("sequence = " + getCookie('sequence'));
-    console.log("expires = " + getCookie('expires'));
+    console.log("username = " + getCookie("username"));
+    console.log("sequence = " + getCookie("sequence"));
+    console.log("expires = " + getCookie("expires"));
    	document.onkeypress = null;
     document.onkeydown = null;
     document.onkeyup = null;
@@ -444,30 +444,29 @@
     function getCookie(c_name){
     	// console.log(document.cookie.length);
 　　　　if (document.cookie.length>0){
-　　　　　　c_start=document.cookie.indexOf(c_name + "=")　　
+　　　　　　c_start=document.cookie.indexOf(c_name + "=");
+		   console.log(c_name + ", " + c_start)
 　　　　　　if (c_start!=-1){ 
-　　　　　　　　c_start=c_start + c_name.length+1　
-　　　　　　　　c_end=document.cookie.indexOf(";",c_start)　　
-　　　　　　　　if (c_end==-1) c_end=document.cookie.length
-　　　　　　　　return unescape(document.cookie.substring(c_start,c_end))
+　　　　　　　　c_start=c_start + c_name.length+1;
+　　　　　　　　c_end=document.cookie.indexOf(";",c_start);
+　　　　　　　　if (c_end==-1) c_end=document.cookie.length;
+　　　　　　　　return unescape(document.cookie.substring(c_start,c_end));
 　　　　　　} 
 　　　　}
 　　　　return ""
 　　}　
 
 	function checkCookie(){
-		username=getCookie('username')
+		username=getCookie('username');
 		if (username!=null && username!=""){
-			alert('Welcome again '+username+'!')
+			alert('Welcome again '+username+'!');
 		}else {
-		  username=prompt('Please enter your name:',"")
+		  username=prompt('Please enter your name:',"");
 		  if (username!=null && username!=""){
-		    setCookie(username, '', 365)
+		    setCookie(username, '', 365);
 		  }
 		}
 	}
-
-	// console.log(getCookie('username'))　
 
 </script>
 
