@@ -439,6 +439,7 @@
 		var exdate=new Date();
 		exdate.setDate(exdate.getDate()+expiredays);
 		document.cookie="username=" + escape(name) + ";sequence=" + escape(value) + ";expires="+exdate.toGMTString();
+		console.log("----" + "username=" + escape(name) + ";sequence=" + escape(value) + ";expires="+exdate.toGMTString());
 		console.log("setCookie: " + document.cookie);
 	}
 
