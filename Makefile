@@ -8,7 +8,7 @@ deploy: $(PUB_DIR) build
 
 $(PUB_DIR): index.html
 	@mkdir -p $(PUB_DIR)
-	-@cp -r index.html $(PUB_DIR)/
+	-@cp -r index.html jquery-1.11.1.min.js collect_data_style.css $(PUB_DIR)/
 	
 
 run: $(SRC_DIR)
