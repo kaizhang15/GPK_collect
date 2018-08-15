@@ -15,9 +15,10 @@
 			window.location.href="mobile_dev.html";
 		}
     </script>
+<!-- <body onLoad="checkCookie()"> -->
 <body onLoad="checkCookie()">
 	<p>Hello World! </p><br>
-	<!-- <button onclick="checkCookie()"> Test </button><br> -->
+	<button onclick="checkCookie()"> Test </button><br>
 	<!-- <iframe src="http://slides.com/kaizhang-1/deck/embed" width="576" height="420" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen>testslide</iframe> -->
 
 
@@ -161,6 +162,7 @@
       location.reload();
     };
 
+    var user_name = "";
     var x = navigator;
     console.log("Browser informtion:");
     console.log("CodeName: " + x.appCodeName);
@@ -348,6 +350,7 @@
    	tmp = "";
     ch="";
     init_time=0;
+    user_name = getCookie('username');
    	document.onkeypress = keypress;
     document.onkeydown = keydown;
     document.onkeyup = keyup;
@@ -359,6 +362,8 @@
 
    function stop_input(){
     last = "";	
+    setCookie(user_name, input_seq, 365);
+    console.log(document.cookie);
    	document.onkeypress = null;
     document.onkeydown = null;
     document.onkeyup = null;
@@ -428,11 +433,10 @@
 
     // document.cookie = 'username=gpk_collection';
 
-	function setCookie(c_name,value,expiredays){
+	function setCookie(name,value,expiredays){
 		var exdate=new Date();
 		exdate.setDate(exdate.getDate()+expiredays);
-		document.cookie=c_name+ "=" +escape(value)+
-		((expiredays==null) ? "" : ";expires="+exdate.toGMTString())
+		document.cookie="username=" + escape(name) + ";sequence=" + escape(value) + ";expires="+exdate.toGMTString();
 	}
 
     function getCookie(c_name){
@@ -456,7 +460,7 @@
 		}else {
 		  username=prompt('Please enter your name:',"")
 		  if (username!=null && username!=""){
-		    setCookie('username',username,365)
+		    setCookie(username, '', 365)
 		  }
 		}
 	}
