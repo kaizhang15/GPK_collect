@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html >
+<head>
+<meta charset="UTF-8">
+<title>Keyboard</title>
+
+<style type="text/css">
+	body{ background: #000;}
+	/* textarea{ display:block;width:880px; height: 100px; margin: 50px auto; font-size: 16px; color:#fff; background: #555;} */
+	.keyboard{ width:908px; margin: 50px auto;}
+</style>
+
+<script type="text/javascript" src="jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="keyboard.min.js"></script>
+
+</head>
+<body>
+
+<!-- <textarea placeholder=" 请在这里输入英文！！！"></textarea> -->
+
+<div class="keyboard"></div>
+
+
+<script type="text/javascript">
+	// $('textarea').focus();
+	$('.keyboard').keyboard({/*audio:'music/keydown.mp3',*/ keyREffect:false, keyMargin:3, keyColorsRun:false,
+							});
+</script>
+
+</body>
+</html>
+
