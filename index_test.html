@@ -1,0 +1,484 @@
+<!DOCTYPE HTML PUBLIC “-//W3C//DTD HTML 4.0 Transitional//EN”>
+<HTML>
+<HEAD>
+  <TITLE>Gliding on Keyboard Data Collection</TITLE>
+  
+</HEAD>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+    <link rel="stylesheet" href="collect_data_style.css">
+    <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.3/FileSaver.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
+    <script type="text/javascript" src="jquery-1.11.1.min.js"></script>
+    <script type="text/javascript">
+    	if((navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i))) {
+			window.location.href="mobile_dev.html";
+		}
+    </script>
+<!-- <body onLoad="checkCookie()"> -->
+<body onLoad="checkCookie()">
+	<p>Hello World! </p><br>
+	<button onclick="checkCookie()"> Test </button><br>
+	<!-- <iframe src="http://slides.com/kaizhang-1/deck/embed" width="576" height="420" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen>testslide</iframe> -->
+
+	<div class="main0">
+    <div class="mdl-card mdl-shadow--16dp">
+      <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect mdl-card--border">
+        <!-- <div class="mdl-tabs__tab-bar"><a class="mdl-tabs__tab is-active" href="#genuine-panel">Genuine    </a></div> -->
+        <div class="mdl-tabs__panel is-active" id="genuine-panel">
+          <div class="mdl-card__supporting-text mdl-card--border">
+            <!-- Colored FAB button-->
+            <form name="mainform" action="#">
+              <!-- <div class="">-->
+              <div>
+                <a>Then press any key to view the responding value:</a>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" id="input_keys" type="text" autocomplete="off" readonly="readonly">
+                  <label class="mdl-textfield__label" for="input_keys"></label>
+                </div>
+              </div>
+
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" id="version" type="text" autocomplete="off" readonly="readonly">
+                <label class="mdl-textfield__label" for="Version">Your Broswer Version</label>
+              </div>
+
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" id="input_seq" type="text" readonly="readonly">
+                <label class="mdl-textfield__label" for="input_seq">Seq  </label>
+              </div>
+              <a>For following questions, please select from the given option by double clicking the input box.</a>
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" list="gliding" id="is_gliding" type="text">
+                <datalist id="gliding">
+                  <select>
+                    <option value="1">0</option>
+                    <option value="0">1</option>
+                  </select>
+                </datalist>  
+                <label class="mdl-textfield__label" for="is_gliding">Are you gliding? (1 for YES; 0 for NO)</label>
+              </div>
+
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" list="glidchar" id="gliding_char" type="text">
+                <datalist id="glidchar">
+                  <select>
+                    <option>is_not_gliding</option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>一</option>
+                    <option>|</option>
+                    <option>丿</option>
+                    <option>乀</option>
+                    <option>┐</option>
+                    <option>└</option>
+                  </select>
+                </datalist>  
+                <label class="mdl-textfield__label" for="gliding_char">gliding_char</label>
+              </div>
+
+            </form>
+            <!-- Accent-colored raised button with ripple-->
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="button_upload_genuine" onclick="submit($('version'), is_gliding, gliding_char, input_seq)">
+              <!-- Rich Tooltip-->
+              <div class="icon material-icons">cloud_upload</div>
+              <div class="mdl-tooltip" data-mdl-for="button_upload_genuine">Upload <strong>genuine signature</strong></div>
+            </button>
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="button_get_info" onclick="refresh_web()" >
+              <!-- Rich Tooltip-->
+              <div class="icon material-icons">refresh</div>
+              <!-- <a href="">a</a> -->
+              <!-- <div class="mdl-tooltip" data-mdl-for="button_get_info">Get <strong>info</strong> of your dataset</div> -->
+            </button>
+
+            <!-- <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="button_get_info" onclick="pakage_send_test()" >
+              <div class="icon material-icons">link</div>
+            </button> -->
+
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="button_get_info" onclick="start_input()" >
+              <!-- Rich Tooltip-->
+              <div class="icon material-icons">star</div>
+              <!-- <a href="">a</a> -->
+              <!-- <div class="mdl-tooltip" data-mdl-for="button_get_info">Get <strong>info</strong> of your dataset</div> -->
+            </button>
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="button_get_info" onclick="stop_input()" >
+              <!-- Rich Tooltip-->
+              <div class="icon material-icons">stop</div>
+              <!-- <a href="">a</a> -->
+              <!-- <div class="mdl-tooltip" data-mdl-for="button_get_info">Get <strong>info</strong> of your dataset</div> -->
+            </button>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="predict.js"></script>
+</BODY>
+
+<script type="text/javascript">
+    function pakage_send_test() {
+      url_tp = "https://gpk-data-collection.netlify.com/.netlify/functions/test";
+      var request_tp = new XMLHttpRequest();
+      request_tp.open("POST", url_tp, true);
+      var data = {};
+      data[entry.q1] = "yes";
+      data['submit'] = 'Submit';
+      var fd = new FormData();
+      for(var item in data){
+        fd.append(item, data[item]);
+      }
+
+      // xhr.send(fd);
+      console.log(fd);
+      request_tp.send(fd);
+      request_tp.onreadystatechange = function(){
+        if(request_tp.readyState == 4 && request_tp.status == 200){
+
+          console.log("success");
+          console.log(request_tp.responseText);
+        }
+      }
+
+      // location.href = url_tp;
+      // console.log(exports.handler);
+    };
+
+    function refresh_web() {
+
+      location.reload();
+    };
+
+    var user_name = "";
+    var x = navigator;
+    console.log("Browser informtion:");
+    console.log("CodeName: " + x.appCodeName);
+    console.log("Name: " + x.appName);
+    console.log("Version: " + x.appVersion);
+    console.log("Platform: " + x.platform);
+    console.log("UA: " + x.userAgent);
+    // document.write("<br> Browser informtion: <br>");
+    mainform.version.value=x.appVersion
+    mainform.input_seq.value=" "
+    var input_string="";
+    var in_seq="";
+    var keycode_array=new Array();
+    var keymap = {
+      32 : "undefined",
+      48 : "0",
+      49 : "1",
+      50 : "2",
+      51 : "3",
+      52 : "4",
+      53 : "5",
+      54 : "6",
+      55 : "7",
+      56 : "8",
+      57 : "9",
+      65 : "a",
+      66 : "b",
+      67 : "c",
+      68 : "d",
+      69 : "e",
+      70 : "f",
+      71 : "g",
+      72 : "h",
+      73 : "i",
+      74 : "j",
+      75 : "k",
+      76 : "l",
+      77 : "m",
+      78 : "n",
+      79 : "o",
+      80 : "p",
+      81 : "q",
+      82 : "r",
+      83 : "s",
+      84 : "t",
+      85 : "u",
+      86 : "v",
+      87 : "w",
+      88 : "x",
+      89 : "y",
+      90 : "z",
+      189: "-",
+      187: "=",
+      192: "`",
+      219: "[",
+      221: "]",
+      220: "|",
+      186: ";",
+      222: "\'",
+      188: "<",
+      190: ".",
+      191: "/",
+    };
+
+    var clock = new Date();
+    var keystring = "";//记录按键的字符串
+    var tmp = "";
+    var last = "";
+    var ch="";
+    var init_time=0;
+
+    function $(s)
+    {
+       return document.getElementById(s)?document.getElementById(s):s;
+    }
+
+    function keypress(e)
+    {
+       var currKey=0,CapsLock=0,e=e||event;
+       currKey=e.keyCode||e.which||e.charCode;
+       CapsLock=currKey>=65&&currKey<=90;
+       switch (currKey)
+       {
+       //屏蔽了退格、制表、回车、空格、方向键、删除键
+       case 8: case 9:case 13:case 16:case 17:case 18:case 20:case 32:case 37:case 38:case 39:case 40:case 46:case 91:
+
+                keyName = ""; break;
+       default :keyName = String.fromCharCode(currKey); break;
+       }
+       keystring += keyName;
+    }
+
+    function keydown(e)
+    {
+       // console.log('Down time:'+ (new Date().getTime()-clock.getTime()))
+       var e = e||event;
+       var currKey = e.keyCode||e.which||e.charCode;
+       tmp = currKey;
+       if(tmp == 27){
+        visualize(keycode_array);
+       } else if (tmp == 8 || tmp == 9 || tmp == 13 || tmp == 16 || tmp == 17 || tmp == 18 || tmp == 20 || tmp == 91 || tmp == 33 || tmp == 34 || tmp == 35 || tmp == 36 || tmp == 37 || tmp == 38 || tmp == 39 || tmp == 40 || tmp == 46){}
+       else{
+       if ((currKey>7&&currKey<14)||(currKey>31&&currKey<47))
+       {
+           switch (currKey)
+           {
+           case 8: keyName = "[退格]"; break;
+           case 9: keyName = "[制表]"; break;
+           case 13:keyName = "[回车]"; break;
+           // case 32:keyName = "[空格]"; break;
+           case 33:keyName = "[PageUp]";   break;
+           case 34:keyName = "[PageDown]";   break;
+           case 35:keyName = "[End]";   break;
+           case 36:keyName = "[Home]";   break;
+           case 37:keyName = "[方向键左]";   break;
+           case 38:keyName = "[方向键上]";   break;
+           case 39:keyName = "[方向键右]";   break;
+           case 40:keyName = "[方向键下]";   break;
+           case 46:keyName = "[删除]";   break;
+           default : keyName = "";    break;
+           }
+           keystring += keyName;
+       }
+       if(tmp == last){}
+       else {
+        for (var k in keymap){
+        if (k == tmp){
+          ch = keymap[k];
+          break;
+        }else{
+          ch = keymap["0"];
+        }
+       }
+       if(tmp != undefined){
+         if(init_time==0){ init_time =  new Date().getTime()-clock.getTime();}
+
+          in_seq += tmp + ' ' + ch + ' Down '+ (new Date().getTime()-clock.getTime()-init_time) + ', ';
+          console.log(tmp + ',' + ch + ',Down,'+ (new Date().getTime()-clock.getTime()-init_time) + ',');
+          mainform.input_seq.value=in_seq;
+        }
+        // file.writeln(tmp + ',Down,'+ (new Date().getTime()-clock.getTime()) + ',' + ch + ',');
+       }
+       if (ch == keymap["0"]){}
+        else{
+       input_string+=ch;
+       mainform.input_keys.value=input_string;
+       keycode_array.push(new Array(tmp.toString()));
+       visualize(new Array(tmp.toString()));
+       }
+       last = tmp;
+       $("content").innerHTML=keystring;
+    }}
+
+    function keyup(e)
+    {
+       var e = e||event;
+       var currKey = e.keyCode||e.which||e.charCode;
+       var tmp2 = currKey;
+       if (tmp2 == 27 || tmp == 8 || tmp == 9 || tmp == 13 || tmp == 16 || tmp == 17 || tmp == 18 || tmp == 20 || tmp == 91 || tmp == 33 || tmp == 34 || tmp == 35 || tmp == 36 || tmp == 37 || tmp == 38 || tmp == 39 || tmp == 40 || tmp == 46){}
+        else {
+       for (var k in keymap){
+        if (k == tmp2){
+          var ch = keymap[k];
+        }
+       }
+       if(tmp != undefined){
+       console.log(tmp2 + ',' + ch + ',Up,'+ (new Date().getTime()-clock.getTime()-init_time) + ',' );
+       in_seq += tmp2 + ' ' + ch + ' Up '+ (new Date().getTime()-clock.getTime()-init_time) + ', ';
+       mainform.input_seq.value=in_seq;
+       unvisualize(new Array(tmp2.toString()));
+       }
+       if (tmp2 == last){
+        last = "";
+       }
+       $("content").innerHTML=keystring;
+    }}
+
+   function start_input(){
+   	input_string="";
+    in_seq="";
+    keycode_array=new Array();
+    keystring = "";
+   	clock = new Date();
+   	last = "";
+   	tmp = "";
+    ch="";
+    init_time=0;
+    user_name = getCookie('username');
+   	document.onkeypress = keypress;
+    document.onkeydown = keydown;
+    document.onkeyup = keyup;
+   }
+
+    // document.onkeypress = keypress;
+    // document.onkeydown = keydown;
+    // document.onkeyup = keyup; 
+
+   function stop_input(){
+    last = "";	
+    setCookie(user_name, in_seq, 365);
+    // console.log("username = " + getCookie("username"));
+    // console.log("sequence = " + getCookie("sequence"));
+    // console.log("expires = " + getCookie("expires"));
+   	document.onkeypress = null;
+    document.onkeydown = null;
+    document.onkeyup = null;
+    // window.onload = function(){
+      // var fun = abc; //引用abc函数
+      // fun(123);
+      console.log(in_seq);
+      console.log(predict(in_seq));
+    // };
+    // console.log(predict(in_seq));
+   }
+
+   var entry = (function(){
+    var prefill_str = "entry.1991227208=version&entry.87192414=is_gliding&entry.1822012518=gliding_char&entry.2043831611=input_seq&entry.1286494305=q1";
+    var prefill = prefill_str.split('&');
+    var entry = {};
+    for(var i in prefill){
+      var j = prefill[i].split('=');
+      entry[j[1]] = j[0];
+    }
+    return entry;
+
+   })();
+
+   function submit(){
+    var posturl ='https://docs.google.com/forms/d/e/1FAIpQLSeWQqKpPHFR7U4bEPYoDrGAvu9A5-ApqXp3wj7NpBpyAbw99g/formResponse';
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+      if (this.readyState == XMLHttpRequest.DONE){
+        if(this.status == 200 || this.status == 0){
+          typeof onsuccess == 'undefined'? console.log('sent'):
+            onsuccess(this.responseText);
+        } else{
+          typeof onerror == 'undefined'? console.log('Not successful!', this.status, key, value, id):
+            onerror(this.responseText);
+        }
+       };
+    }
+
+    xhr.open("POST", posturl, true);
+    var data = {};
+    data[entry.version] = x.appVersion;
+    data[entry.is_gliding] = document.getElementById("is_gliding").value;
+    data[entry.gliding_char] = document.getElementById("gliding_char").value;
+    data[entry.input_seq] = in_seq;
+    data['submit'] = 'Submit';
+    var fd = new FormData();
+    for(var item in data){
+      fd.append(item, data[item]);
+    }
+
+    xhr.send(fd);
+    console.log(fd);
+    location.reload();
+    }
+
+    function visualize(input) {
+
+            for (var i = 0; i < input.length; i++) {
+                var path = "path" + input[i]
+                var ele = document.getElementById(path)
+                ele.setAttribute('fill', 'red')
+            }
+
+    }
+    function unvisualize(input) {
+
+            for (var i = 0; i < input.length; i++) {
+                var path = "path" + input[i]
+                var ele = document.getElementById(path)
+                ele.setAttribute('fill', '#97c5d5')
+            }
+    }
+
+    // document.cookie = 'username=gpk_collection';
+
+	function setCookie(name,value,expiredays){
+		var exdatename=new Date();
+    exdatename.setDate(exdatename.getDate()+expiredays);
+    var exdateseq = new Date();
+    exdateseq.setDate(exdateseq.getDate()+1);
+		document.cookie="username=" + escape(name) + ";expires="+exdatename.toGMTString();
+		document.cookie="sequence=" + escape(value) + ";expires="+exdateseq.toGMTString();
+		// console.log("----" + "username=" + escape(name) + ";sequence=" + escape(value) + ";expires="+exdate.toGMTString());
+		// console.log("setCookie: " + document.cookie);
+	}
+
+    function getCookie(c_name){
+    	// console.log(document.cookie.length);
+　　　　if (document.cookie.length>0){
+　　　　　　c_start=document.cookie.indexOf(c_name + "=");
+		   // console.log(c_name + ", " + c_start)
+　　　　　　if (c_start!=-1){ 
+　　　　　　　　c_start=c_start + c_name.length+1;
+　　　　　　　　c_end=document.cookie.indexOf(";",c_start);
+　　　　　　　　if (c_end==-1) c_end=document.cookie.length;
+　　　　　　　　return unescape(document.cookie.substring(c_start,c_end));
+　　　　　　} 
+　　　　}
+　　　　return ""
+　　}　
+
+	function checkCookie(){
+		username=getCookie('username');
+		if (username!=null && username!=""){
+			alert("Dear " + username +", welcome!");
+		}else {
+		  username=prompt('Please enter your name:',"");
+		  if (username!=null && username!=""){
+		    setCookie(username, '', 365);
+		  }
+		}
+	}
+
+</script>
+
+
+</HTML>
