@@ -247,7 +247,7 @@
 
 
 
-        function predict(input_sequence) {
+        function predict(input_sequence, true_label) {
             var distance = []
             for (var j = 0; j < dict_index.length; j++) {
                 distance[j] = (dtw(divide_single_vector(splite_sequence((remove_last_dot(trim(input_sequence))))), dictionary[dict_index[j]]))
@@ -260,9 +260,22 @@
                     min_index = i
                 }
             }
+            var second_min = 1000009
+            var second_min_index = 0
+            for( var i = 0; i< distance.length ;i ++){
+                if(i == min_index){
+                    continue
+                }else{
+                    if(distance[i] < second_min){
+                        second_min_index = i
+                        second_min = distance[i]
+                    }
+                }
+            }
             // document.write(distance)
             // document.write("estimated label:" + dict_index[min_index])
-            return dict_index[min_index]
+
+            return [dict_index[min_index], dict_index[second_min_index]]
         }
         // var matrix = splite_sequence(remove_last_dot(trim(input_sequence)))
         // for (var i = 0; i < matrix.length; i++) {
