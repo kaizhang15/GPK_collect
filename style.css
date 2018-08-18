@@ -1,0 +1,37 @@
+.editbox{
+    background: #ffffff;
+    border: 1px solid #b7b7b7;
+    color: #003366;
+    cursor: text;
+    font-family: "arial";
+    font-size: 9pt;
+    height: 18px;
+    padding: 1px; 
+}
+
+.noneinput{
+    background: rgb(255,242,204);
+    text-align:center;
+    width:95%;height:99%;
+    /* border: 1px solid #b7b7b7; */
+    /* border-top-style: none;
+    border-right-style: none;
+    border-left-style: none; */
+    /* background-color: #f6f6f6; */
+    /* border-bottom-style: none; */
+}
+
+.bluebuttoncss {
+    font-family: "tahoma", "宋体";
+    font-size: 9pt; color: #003366;
+    height: 18px;
+    border: 1px #93bee2 solid;
+    border-bottom: #93bee2 1px solid;
+    border-left: #93bee2 1px solid;
+    border-right: #93bee2 1px solid;
+    border-top: #93bee2 1px solid;
+    /* background-image:url(../images/blue_button_bg.gif); */
+    background-color: #ffffff;
+    cursor: hand;
+    font-style: normal ;
+}
