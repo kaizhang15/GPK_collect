@@ -19,7 +19,7 @@
 		}
     </script>
 <!-- <body onLoad="checkCookie()"> -->
-<body onLoad="checkCookie()">
+<body >
 	<p>Hello World! </p><br>
 	<button onclick="checkCookie()"> Test </button><br>
 	<!-- <iframe src="http://slides.com/kaizhang-1/deck/embed" width="576" height="420" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen>testslide</iframe> -->
@@ -156,7 +156,6 @@
     };
 
     function refresh_web() {
-
       location.reload();
     };
 
@@ -253,14 +252,33 @@
        keystring += keyName;
     }
 
+    var last_time = 0;
+    var interval_time = 0;
+    var timer = 0 ;
+    
     function keydown(e)
     {
        // console.log('Down time:'+ (new Date().getTime()-clock.getTime()))
+      //  if (last_time == 0){
+        var new_time = new Date();
+        last_time = new_time;
+      //  }
+      //  else {
+        // var new_time = new Date();
+        // interval_time = new_time.getTime() - last_time.getTime();
+        // console.log(interval_time);
+        // last_time = new_time;
+        
+        // if (interval_time > 1000){
+        //   stop_input();
+        //   return ;
+        // }
+      //  }
        var e = e||event;
        var currKey = e.keyCode||e.which||e.charCode;
        tmp = currKey;
        if(tmp == 27){
-        visualize(keycode_array);
+        // visualize(keycode_array);
        } else if (tmp == 8 || tmp == 9 || tmp == 13 || tmp == 16 || tmp == 17 || tmp == 18 || tmp == 20 || tmp == 91 || tmp == 33 || tmp == 34 || tmp == 35 || tmp == 36 || tmp == 37 || tmp == 38 || tmp == 39 || tmp == 40 || tmp == 46){}
        else{
        if ((currKey>7&&currKey<14)||(currKey>31&&currKey<47))
@@ -308,7 +326,7 @@
        input_string+=ch;
        mainform.input_keys.value=input_string;
        keycode_array.push(new Array(tmp.toString()));
-       visualize(new Array(tmp.toString()));
+      //  visualize(new Array(tmp.toString()));
        }
        last = tmp;
        $("content").innerHTML=keystring;
@@ -330,13 +348,24 @@
        console.log(tmp2 + ',' + ch + ',Up,'+ (new Date().getTime()-clock.getTime()-init_time) + ',' );
        in_seq += tmp2 + ' ' + ch + ' Up '+ (new Date().getTime()-clock.getTime()-init_time) + ', ';
        mainform.input_seq.value=in_seq;
-       unvisualize(new Array(tmp2.toString()));
+      //  unvisualize(new Array(tmp2.toString()));
        }
        if (tmp2 == last){
         last = "";
        }
        $("content").innerHTML=keystring;
     }}
+
+    function detect_timer(){
+      if (last_time == 0){return;}
+      var new_time = new Date();
+        interval_time = new_time.getTime() - last_time.getTime();
+        console.log(interval_time);
+        if (interval_time > 1000){
+          stop_input();
+          interval_time = 0;
+        }
+    }
 
    function start_input(){
    	input_string="";
@@ -349,6 +378,7 @@
     ch="";
     init_time=0;
     user_name = getCookie('username');
+    timer = self.setInterval("detect_timer()", 20);
    	document.onkeypress = keypress;
     document.onkeydown = keydown;
     document.onkeyup = keyup;
@@ -359,7 +389,9 @@
     // document.onkeyup = keyup; 
 
    function stop_input(){
+    timer = 0;
     last = "";	
+    last_time=0;
     setCookie(user_name, in_seq, 365);
     // console.log("username = " + getCookie("username"));
     // console.log("sequence = " + getCookie("sequence"));
