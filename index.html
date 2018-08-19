@@ -1022,7 +1022,11 @@ if(n){Xt.loop&&(t%=n,t<0&&(t=n+t)),t=Math.max(Math.min(t,n-1),0);for(var o=0;o<n
 
 	if (length == 3){
       console.log("---stop_function---- seq_array: " + seq_array);
-      send_data_test();
+	  send_data_test();
+	  seq_array.pop();
+	  seq_array.pop();
+	  seq_array.pop();
+	  console.log("---after stop_function---- seq_array: " + seq_array);
     }
 
 	  console.log(in_seq);
