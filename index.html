@@ -1051,11 +1051,18 @@ if(n){Xt.loop&&(t%=n,t<0&&(t=n+t)),t=Math.max(Math.min(t,n-1),0);for(var o=0;o<n
 		case 14: form14.result.value = result_array; break;
 	}
 	setTimeout("",30)
+	var correct_flag = 0;
 	for (item in result_array){
 		if (result_array[item] == labelmap[predict_position]){
 			alert(" Predict correctly! \n 正确预测! \n Next page in 3 seconds. \n 3秒后进入下一页.");
-			setTimeout("Reveal.right()",3000)
+			correct_flag = 1;
+			setTimeout("Reveal.right()",3000);
+			break;
 		}
+	}
+	if (correct_flat == 0){
+		alert(" Predict wrongly! \n 预测错误! \n Please sliding again. \n 请重新滑动输入.");
+		start_input(predict_position);
 	}
    }
 
