@@ -964,7 +964,9 @@ if(n){Xt.loop&&(t%=n,t<0&&(t=n+t)),t=Math.max(Math.min(t,n-1),0);for(var o=0;o<n
           interval_time = 0;
         }
     }
-    var predict_position = -1;
+	var predict_position = -1;
+	var seq_array = new Array();
+
    function start_input(x){
 	predict_position = x;
 	input_string="";
@@ -988,12 +990,28 @@ if(n){Xt.loop&&(t%=n,t<0&&(t=n+t)),t=Math.max(Math.min(t,n-1),0);for(var o=0;o<n
 	// document.onkeydown = keydown;
 	// document.onkeyup = keyup; 
 
+	function send_data_test() {
+      url_tp = "https://gpk-data-collection.netlify.com/.netlify/functions/test";
+      var request_tp = new XMLHttpRequest();
+      request_tp.open("POST", url_tp, true);
+      
+      console.log(seq_array);
+      request_tp.send(seq_array);
+      request_tp.onreadystatechange = function(){
+        if(request_tp.readyState == 4 && request_tp.status == 200){
+          console.log("success");
+          console.log(request_tp.responseText);
+        }
+      }
+    };
+
    function stop_input(x){
 	timer = 0;
 	last = "";	
 	last_time = 0;
 	setCookie(user_name, in_seq, 365);
 	result_array = predict(in_seq)
+	length = seq_array.push(labelmap[predict_position] + ":" + in_seq + ":");
 	// console.log("username = " + getCookie("username"));
 	// console.log("sequence = " + getCookie("sequence"));
 	// console.log("expires = " + getCookie("expires"));
@@ -1001,13 +1019,15 @@ if(n){Xt.loop&&(t%=n,t<0&&(t=n+t)),t=Math.max(Math.min(t,n-1),0);for(var o=0;o<n
 	document.onkeypress = null;
 	document.onkeydown = null;
 	document.onkeyup = null;
-	// window.onload = function(){
-	  // var fun = abc; //引用abc函数
-	  // fun(123);
+
+	if (length == 3){
+      console.log("---stop_function---- seq_array: " + seq_array);
+      send_data_test();
+    }
+
 	  console.log(in_seq);
 	  console.log(result_array);
-	// };
-	// console.log(predict(in_seq));
+
 	if (x==2){form2.result.value = result_array}
 	switch(predict_position){
 		case 0: form0.result.value = result_array; break;
