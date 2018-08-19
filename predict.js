@@ -250,7 +250,14 @@
         function predict(input_sequence, true_label) {
             var distance = []
             for (var j = 0; j < dict_index.length; j++) {
-                distance[j] = (dtw(divide_single_vector(splite_sequence((remove_last_dot(trim(input_sequence))))), dictionary[dict_index[j]]))
+                var min_value = 999999
+                for (var dict_len = 0; dict_len < dictionary[dict_index[j]].length; dict_len++) {
+                    var temp_distance = (dtw(divide_single_vector(splite_sequence((remove_last_dot(trim(input_sequence))))), dictionary[dict_index[j]][dict_len]))
+                    if (temp_distance < min_value) {
+                        min_value = temp_distance
+                    }
+                }
+            distance[j] = min_value
             }
             var min = distance[0]
             var min_index = 0
