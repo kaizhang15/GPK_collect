@@ -58,8 +58,8 @@
 </div></div>
 <div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 780px; left: 90px; top: 249px;" data-block-id="b50124d5afe2c03d77588ecaee2e762e"><div class="sl-block-style" style="z-index: 12;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12;">
 
-		<p style="text-align: left;">Before gliding or regliding, please press "start" button.</p>
-		<p style="text-align: left;">在滑动或重新滑动前，请先点击”开始按钮“。<button class="button button-primary button-pill button-large"> Start/开始 </button></p>	
+		<p style="text-align: left;">Before gliding, please press "start" button.</p>
+		<p style="text-align: left;">在滑动前，请先点击”开始按钮“。<button class="button button-primary button-pill button-large"> Start/开始 </button></p>	
 
 
 <p style="text-align: left;">Then input according to the hints, gliding on keyboard directly.</p>
@@ -101,7 +101,7 @@
 	<style type="text/css">
 		.keyboard1{ width:908px; margin: 50px auto;}
 	</style>
-	<div class="keyboard1"></div>
+	<div id="keyboard1" class="keyboard1"></div>
 	<br>
 	<form style="text-align: left;" name="form2" action="#">
 		<div >
@@ -1004,6 +1004,7 @@ if(n){Xt.loop&&(t%=n,t<0&&(t=n+t)),t=Math.max(Math.min(t,n-1),0);for(var o=0;o<n
         }
       }
     };
+	// $('.keyboard1').keyboard({keyREffect:false, keyMargin:1, keyColorsRun:false,});
 
    function stop_input(x){
 	timer = 0;
@@ -1012,6 +1013,7 @@ if(n){Xt.loop&&(t%=n,t<0&&(t=n+t)),t=Math.max(Math.min(t,n-1),0);for(var o=0;o<n
 	setCookie(user_name, in_seq, 365);
 	result_array = predict(in_seq)
 	length = seq_array.push(labelmap[predict_position] + ":" + in_seq + ":");
+	
 	// console.log("username = " + getCookie("username"));
 	// console.log("sequence = " + getCookie("sequence"));
 	// console.log("expires = " + getCookie("expires"));
@@ -1050,7 +1052,10 @@ if(n){Xt.loop&&(t%=n,t<0&&(t=n+t)),t=Math.max(Math.min(t,n-1),0);for(var o=0;o<n
 		case 13: form13.result.value = result_array; break;
 		case 14: form14.result.value = result_array; break;
 	}
-	setTimeout("",30)
+	// $('.keyboard1').visualize(keycode_array);
+	// $(keyboard1).visualize(keycode_array);
+	// $(document.getElementById('keyboard1')).visualize(keycode_array);
+	setTimeout("",30);
 	var correct_flag = 0;
 	for (item in result_array){
 		if (result_array[item] == labelmap[predict_position]){
