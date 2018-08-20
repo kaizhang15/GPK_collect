@@ -1063,14 +1063,14 @@ if(n){Xt.loop&&(t%=n,t<0&&(t=n+t)),t=Math.max(Math.min(t,n-1),0);for(var o=0;o<n
 	var correct_flag = 0;
 	for (item in result_array){
 		if (result_array[item] == labelmap[predict_position]){
-			Alert(" Predict correctly! \n 正确预测! <br> Next page in 3 seconds. \n 3秒后进入下一页.");
+			Alert(" Predict correctly! \n 正确预测! <br> Next page in 3 seconds. \n 3秒后进入下一页. <br> Please wait for the dialog to disappear. \n 请等待提示框消失.");
 			correct_flag = 1;
 			setTimeout("Reveal.right()",3000);
 			break;
 		}
 	}
 	if (correct_flag == 0){
-		Alert(" Predict wrongly! \n 预测错误! <br> Please sliding again. \n 请重新滑动输入.");
+		Alert(" Predict wrongly! \n 预测错误! <br> Please sliding again. \n 请重新滑动输入. <br> Please wait for the dialog to disappear. \n 请等待提示框消失.");
 		start_input(predict_position);
 	}
    }
