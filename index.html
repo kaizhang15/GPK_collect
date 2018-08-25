@@ -736,6 +736,10 @@ if(n){Xt.loop&&(t%=n,t<0&&(t=n+t)),t=Math.max(Math.min(t,n-1),0);for(var o=0;o<n
 <script type="text/javascript">
 	var countdown_timeout_flag = 0;
 	var clockcountdown = null;
+	function stopfunction(){
+		  clearInterval(clockcountdown);
+		  console.log("timeout  stop");
+	  }
 	function CountDown(divname){
 	  var leftsecond = 15;
 	  var interval = 1000;
@@ -744,8 +748,8 @@ if(n){Xt.loop&&(t%=n,t<0&&(t=n+t)),t=Math.max(Math.min(t,n-1),0);for(var o=0;o<n
         var cc = document.getElementById(divname);
         cc.innerHTML = "倒计时："+leftsecond+"秒";
         // if (leftsecond == 0) return;
-      }
-      clockcountdown = self.setInterval(function(){down(leftsecond-1); if (leftsecond==0) {self.clearInterval(clockcountdown); leftsecond = 15; countdown_timeout_flag = 1; }}, interval);
+	  }
+      clockcountdown = self.setInterval(function(){down(leftsecond-1); if (leftsecond==0) {leftsecond = 15; countdown_timeout_flag = 1; stopfunction(); }}, interval);
 	}
 	
 
@@ -962,6 +966,8 @@ if(n){Xt.loop&&(t%=n,t<0&&(t=n+t)),t=Math.max(Math.min(t,n-1),0);for(var o=0;o<n
 	function detect_timer(){
 	  if (countdown_timeout_flag == 1){
 		countdown_timeout_flag = 0;
+		window.clearInterval(clockcountdown);
+
 		timeout_stop_input(predict_position);
 	  }
 	  if (last_time == 0){return;}
@@ -977,6 +983,26 @@ if(n){Xt.loop&&(t%=n,t<0&&(t=n+t)),t=Math.max(Math.min(t,n-1),0);for(var o=0;o<n
     }
 	var predict_position = -1;
 	var seq_array = new Array();
+
+   function timeout_start_input(x){
+	predict_position = x;
+	input_string="";
+	in_seq="";
+	keycode_array=new Array();
+	keystring = "";
+	clock = new Date();
+	last = "";
+	tmp = "";
+	ch="";
+	init_time=0;
+	user_name = getCookie('username');
+	// console.log("start------ x = " + x);
+	// CountDown(divname);
+	timer = self.setInterval("detect_timer()", 20);
+	document.onkeypress = keypress;
+	document.onkeydown = keydown;
+	document.onkeyup = keyup;
+   }
 
    function start_input(x, divname){
 	predict_position = x;
@@ -1023,11 +1049,12 @@ if(n){Xt.loop&&(t%=n,t<0&&(t=n+t)),t=Math.max(Math.min(t,n-1),0);for(var o=0;o<n
 	last = "";	
 	last_time = 0;
 	in_seq="";
-
+	countdown_timeout_flag = 0;
 	document.onkeypress = null;
 	document.onkeydown = null;
 	document.onkeyup = null;
-	Alert(" Timeout! \n 输入超时! <br> Next page in 3 seconds. \n 3秒后进入下一页. <br> Please wait for the dialog to disappear. <br> 请等待提示框消失.");
+	window.clearInterval(clockcountdown);
+	Alert(" Timeout! \n 输入超时! <br> Next page in 3 seconds. \n 3秒后进入下一页. <br> Please wait for the dialog to disappear. <br> 请等待提示框消失.", 'bgtimeout', 'msgtimeout', 'msgtitletimeout');
 	setTimeout("Reveal.right()",3000);
 
    }
@@ -1085,16 +1112,18 @@ if(n){Xt.loop&&(t%=n,t<0&&(t=n+t)),t=Math.max(Math.min(t,n-1),0);for(var o=0;o<n
 	var correct_flag = 0;
 	for (item in result_array){
 		if (result_array[item] == labelmap[predict_position]){
+			// stopfunction();
 			window.clearInterval(clockcountdown);
-			Alert(" Predict correctly! \n 正确预测! <br> Next page in 3 seconds. \n 3秒后进入下一页. <br> Please wait for the dialog to disappear. <br> 请等待提示框消失.");
+			countdown_timeout_flag = 0;
+			Alert(" Predict correctly! \n 正确预测! <br> Next page in 3 seconds. \n 3秒后进入下一页. <br> Please wait for the dialog to disappear. <br> 请等待提示框消失.", 'bgcorrect', 'msgcorrect', 'msgtitlecorrect');
 			correct_flag = 1;
 			setTimeout("Reveal.right()",3000);
 			break;
 		}
 	}
 	if (correct_flag == 0){
-		Alert(" Predict wrongly! \n 预测错误! <br> Please sliding again. \n 请重新滑动输入.");
-		start_input(predict_position);
+		Alert(" Predict wrongly! \n 预测错误! <br> Please sliding again. \n 请重新滑动输入.", 'bgwrong', 'msgwrong', 'msgtitlewrong');
+		timeout_start_input(predict_position);
 	}
    }
 
@@ -1199,21 +1228,38 @@ if(n){Xt.loop&&(t%=n,t<0&&(t=n+t)),t=Math.max(Math.min(t,n-1),0);for(var o=0;o<n
 		  }
 		}
 	}
-	function Alert(str) {    
+	
+	// var alert_flag = 0;
+	var alert_flag_tmp = 0;
+	var bg_tmp = "";
+	var msg_tmp = "";
+	var msgtitle_tmp = "";
+	function Alert(str, divbgtype, divmsgtype, divmsgtitle) {
+		// console.log("sdfsdf")
+		if (alert_flag_tmp == 1){
+			closewin(bg_tmp, msg_tmp, msgtitle_tmp);
+			alert_flag_tmp = 0;
+		}
+		alert_flag_tmp = 1;
+		bg_tmp = divbgtype;
+		msg_tmp = divmsgtype;
+		msgtitle_tmp = divmsgtitle;
 		var msgw,msgh,bordercolor;    
-		msgw=450;//提示窗口的宽度    
-		msgh=220;//提示窗口的高度    
-		titleheight=35 //提示窗口标题高度    
-		// bordercolor="#336699";//提示窗口的边框颜色    
+		msgw=450;
+		msgh=220;
+		titleheight=35;
+		
 		bordercolor="rgb(255, 225, 0)";
-		titlecolor="#99CCFF";//提示窗口的标题颜色    
+		titlecolor="#99CCFF";
+
 		var sWidth,sHeight;    
-		//获取当前窗口尺寸    
+
 		sWidth = document.body.offsetWidth;    
 		sHeight = document.body.offsetHeight;    
-		//背景div    
+
 		var bgObj=document.createElement("div");    
-		bgObj.setAttribute('id','alertbgDiv');    
+		bgObj.setAttribute('id',divbgtype);
+		// bgObj.setAttribute('id','alertbgDiv');
 		bgObj.style.position="absolute";    
 		bgObj.style.top="0";    
 		bgObj.style.background="#E8E8E8";    
@@ -1224,18 +1270,17 @@ if(n){Xt.loop&&(t%=n,t<0&&(t=n+t)),t=Math.max(Math.min(t,n-1),0);for(var o=0;o<n
 		bgObj.style.height = sHeight + "px";    
 		bgObj.style.zIndex = "10000";    
 		document.body.appendChild(bgObj);    
-		//创建提示窗口的div    
-		var msgObj = document.createElement("div")    
-		msgObj.setAttribute("id","alertmsgDiv");    
+
+		var msgObj = document.createElement("div");
+		msgObj.setAttribute("id",divmsgtype);
+		// msgObj.setAttribute("id","alertmsgDiv");
 		msgObj.setAttribute("align","center");    
 		msgObj.style.background="white";    
 		msgObj.style.border="1px solid " + bordercolor;    
 		msgObj.style.position = "absolute";    
 		msgObj.style.left = "50%";    
 		msgObj.style.font="18px/1.6em Verdana, Geneva, Arial, Helvetica, sans-serif";    
-		//窗口距离左侧和顶端的距离     
 		msgObj.style.marginLeft = "-225px";    
-		//窗口被卷去的高+（屏幕可用工作区高/2）-150    
 		msgObj.style.top = document.body.scrollTop+(window.screen.availHeight/2)-150 +"px";    
 		msgObj.style.width = msgw + "px";    
 		msgObj.style.height = msgh + "px";    
@@ -1243,9 +1288,10 @@ if(n){Xt.loop&&(t%=n,t<0&&(t=n+t)),t=Math.max(Math.min(t,n-1),0);for(var o=0;o<n
 		msgObj.style.lineHeight ="35px";    
 		msgObj.style.zIndex = "10001";    
 		document.body.appendChild(msgObj);    
-		//提示信息标题    
+
 		var title=document.createElement("h4");    
-		title.setAttribute("id","alertmsgTitle");    
+		// title.setAttribute("id","alertmsgTitle");
+		title.setAttribute("id",divmsgtitle);
 		title.setAttribute("align","left");    
 		title.style.margin="0";    
 		title.style.padding="3px";    
@@ -1257,20 +1303,32 @@ if(n){Xt.loop&&(t%=n,t<0&&(t=n+t)),t=Math.max(Math.min(t,n-1),0);for(var o=0;o<n
 		title.style.font="18px Verdana, Geneva, Arial, Helvetica, sans-serif";    
 		title.style.color="white";    
 		title.innerHTML="提示信息";    
-		document.getElementById("alertmsgDiv").appendChild(title);    
-		//提示信息    
+		// document.getElementById("alertmsgDiv").appendChild(title);    
+		document.getElementById(divmsgtype).appendChild(title);
 		var txt = document.createElement("p");    
 		txt.setAttribute("id","msgTxt");    
 		txt.style.margin="16px 10px";    
 		txt.innerHTML = str;    
-		document.getElementById("alertmsgDiv").appendChild(txt);    
-		//设置关闭时间    
-		window.setTimeout("closewin()",3000);     
+		// document.getElementById("alertmsgDiv").appendChild(txt);    
+		document.getElementById(divmsgtype).appendChild(txt);
+		
+		window.setTimeout(function(){closeself()},3000);
+		// console.log("--------------------------")
+		// document.body.removeChild(document.getElementById(divbgtype));
+		// document.getElementById(divmsgtype).removeChild(document.getElementById(divmsgtitle));
+		// document.body.removeChild(document.getElementById(divmsgtype));
+		function closeself(){
+			closewin(divbgtype, divmsgtype, divmsgtitle);
+			alert_flag_tmp = 0;
+		}
 	}    
-	function closewin() {    
-		document.body.removeChild(document.getElementById("alertbgDiv"));    
-		document.getElementById("alertmsgDiv").removeChild(document.getElementById("alertmsgTitle"));    
-		document.body.removeChild(document.getElementById("alertmsgDiv"));    
+	function closewin(divbgtype, divmsgtype, divmsgtitle) {    
+		document.body.removeChild(document.getElementById(divbgtype));
+		// document.body.removeChild(document.getElementById("alertbgDiv"));
+		// document.getElementById("alertmsgDiv").removeChild(document.getElementById("alertmsgTitle"));    
+		document.getElementById(divmsgtype).removeChild(document.getElementById(divmsgtitle));
+		// document.body.removeChild(document.getElementById("alertmsgDiv"));
+		document.body.removeChild(document.getElementById(divmsgtype));
 	} 
 </script>
 
