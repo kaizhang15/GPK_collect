@@ -738,7 +738,7 @@ if(n){Xt.loop&&(t%=n,t<0&&(t=n+t)),t=Math.max(Math.min(t,n-1),0);for(var o=0;o<n
 	var clockcountdown = null;
 	function stopfunction(){
 		  clearInterval(clockcountdown);
-		  console.log("timeout  stop");
+		//   console.log("timeout  stop");
 	  }
 	function CountDown(divname){
 	  var leftsecond = 15;
@@ -1323,12 +1323,15 @@ if(n){Xt.loop&&(t%=n,t<0&&(t=n+t)),t=Math.max(Math.min(t,n-1),0);for(var o=0;o<n
 		}
 	}    
 	function closewin(divbgtype, divmsgtype, divmsgtitle) {    
-		document.body.removeChild(document.getElementById(divbgtype));
-		// document.body.removeChild(document.getElementById("alertbgDiv"));
-		// document.getElementById("alertmsgDiv").removeChild(document.getElementById("alertmsgTitle"));    
-		document.getElementById(divmsgtype).removeChild(document.getElementById(divmsgtitle));
-		// document.body.removeChild(document.getElementById("alertmsgDiv"));
-		document.body.removeChild(document.getElementById(divmsgtype));
+		if (document.getElementById(divbgtype)){
+			document.body.removeChild(document.getElementById(divbgtype));
+			// document.body.removeChild(document.getElementById("alertbgDiv"));
+			// document.getElementById("alertmsgDiv").removeChild(document.getElementById("alertmsgTitle"));    
+			document.getElementById(divmsgtype).removeChild(document.getElementById(divmsgtitle));
+			// document.body.removeChild(document.getElementById("alertmsgDiv"));
+			document.body.removeChild(document.getElementById(divmsgtype));
+		}
+		
 	} 
 </script>
 
