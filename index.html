@@ -107,7 +107,7 @@
 	<br>
 	<form style="text-align: left;" name="form2" action="#">
 		<div >
-			<label for="Result">Predict result: </label>
+			<label id="result2" for="Result">Predict result:  </label>
 			<input class="noneinput" id="result" type="text" autocomplete="off" readonly="readonly">
 		</div>
 	</form>
@@ -140,7 +140,7 @@
 		<br>
 		<form style="text-align: left;" name="form4" action="#">
 			<div >
-				<label for="Result">Predict result: </label>
+				<label id="result4" for="Result">Predict result: </label>
 				<input class="noneinput" id="result" type="text" autocomplete="off" readonly="readonly">
 			</div>
 		</form>
@@ -171,7 +171,7 @@
 		<br>
 		<form style="text-align: left;" name="form9" action="#">
 			<div >
-				<label for="Result">Predict result: </label>
+				<label id="result9" for="Result">Predict result: </label>
 				<input class="noneinput" id="result" type="text" autocomplete="off" readonly="readonly">
 			</div>
 		</form>
@@ -211,7 +211,7 @@
 		<br>
 		<form style="text-align: left;" name="form7" action="#">
 			<div >
-				<label for="Result">Predict result: </label>
+				<label id="result7" for="Result">Predict result: </label>
 				<input class="noneinput" id="result" type="text" autocomplete="off" readonly="readonly">
 			</div>
 		</form>
@@ -242,7 +242,7 @@
 		<br>
 		<form style="text-align: left;" name="form3" action="#">
 			<div >
-				<label for="Result">Predict result: </label>
+				<label id="result3" for="Result">Predict result: </label>
 				<input class="noneinput" id="result" type="text" autocomplete="off" readonly="readonly">
 			</div>
 		</form>
@@ -273,7 +273,7 @@
 		<br>
 		<form style="text-align: left;" name="form0" action="#">
 			<div >
-				<label for="Result">Predict result: </label>
+				<label id="result0" for="Result">Predict result: </label>
 				<input class="noneinput" id="result" type="text" autocomplete="off" readonly="readonly">
 			</div>
 		</form>
@@ -304,7 +304,7 @@
 		<br>
 		<form style="text-align: left;" name="form6" action="#">
 			<div >
-				<label for="Result">Predict result: </label>
+				<label id="result6" for="Result">Predict result: </label>
 				<input class="noneinput" id="result" type="text" autocomplete="off" readonly="readonly">
 			</div>
 		</form>
@@ -344,7 +344,7 @@
 		<br>
 		<form style="text-align: left;" name="form1" action="#">
 			<div >
-				<label for="Result">Predict result: </label>
+				<label id="result1" for="Result">Predict result: </label>
 				<input class="noneinput" id="result" type="text" autocomplete="off" readonly="readonly">
 			</div>
 		</form>
@@ -375,7 +375,7 @@
 		<br>
 		<form style="text-align: left;" name="form10" action="#">
 			<div >
-				<label for="Result">Predict result: </label>
+				<label id="result10" for="Result">Predict result: </label>
 				<input class="noneinput" id="result" type="text" autocomplete="off" readonly="readonly">
 			</div>
 		</form>
@@ -406,7 +406,7 @@
 		<br>
 		<form style="text-align: left;" name="form11" action="#">
 			<div >
-				<label for="Result">Predict result: </label>
+				<label id="result11" for="Result">Predict result: </label>
 				<input class="noneinput" id="result" type="text" autocomplete="off" readonly="readonly">
 			</div>
 		</form>
@@ -437,7 +437,7 @@
 		<br>
 		<form style="text-align: left;" name="form12" action="#">
 			<div >
-				<label for="Result">Predict result: </label>
+				<label id="result12" for="Result">Predict result: </label>
 				<input class="noneinput" id="result" type="text" autocomplete="off" readonly="readonly">
 			</div>
 		</form>
@@ -468,7 +468,7 @@
 		<br>
 		<form style="text-align: left;" name="form8" action="#">
 			<div >
-				<label for="Result">Predict result: </label>
+				<label id="result8" for="Result">Predict result: </label>
 				<input class="noneinput" id="result" type="text" autocomplete="off" readonly="readonly">
 			</div>
 		</form>
@@ -499,7 +499,7 @@
 		<br>
 		<form style="text-align: left;" name="form13" action="#">
 			<div >
-				<label for="Result">Predict result: </label>
+				<label id="result13" for="Result">Predict result: </label>
 				<input class="noneinput" id="result" type="text" autocomplete="off" readonly="readonly">
 			</div>
 		</form>
@@ -529,7 +529,7 @@
 		<br>
 		<form style="text-align: left;" name="form14" action="#">
 			<div >
-				<label for="Result">Predict result: </label>
+				<label id="result14" for="Result">Predict result: </label>
 				<input class="noneinput" id="result" type="text" autocomplete="off" readonly="readonly">
 			</div>
 		</form>
@@ -1070,8 +1070,8 @@ if(n){Xt.loop&&(t%=n,t<0&&(t=n+t)),t=Math.max(Math.min(t,n-1),0);for(var o=0;o<n
 	document.onkeydown = null;
 	document.onkeyup = null;
 	window.clearInterval(clockcountdown);
-	Alert(" Timeout! \n 输入超时! <br> Next page in 3 seconds. \n 3秒后进入下一页. <br> Please wait for the dialog to disappear. <br> 请等待提示框消失.", 'bgtimeout', 'msgtimeout', 'msgtitletimeout');
-	setTimeout("Reveal.right()",3000);
+	Alert(" Timeout! \n 输入超时! <br> Next page in 2 seconds. \n 2秒后进入下一页. <br> Please wait for the dialog to disappear. <br> 请等待提示框消失.", 'bgtimeout', 'msgtimeout', 'msgtitletimeout');
+	setTimeout("Reveal.right()",2000);
 
    }
 
@@ -1131,17 +1131,48 @@ if(n){Xt.loop&&(t%=n,t<0&&(t=n+t)),t=Math.max(Math.min(t,n-1),0);for(var o=0;o<n
 			// stopfunction();
 			window.clearInterval(clockcountdown);
 			countdown_timeout_flag = 0;
-			Alert(" Predict correctly! \n 正确预测! <br> Next page in 3 seconds. \n 3秒后进入下一页. <br> Please wait for the dialog to disappear. <br> 请等待提示框消失.", 'bgcorrect', 'msgcorrect', 'msgtitlecorrect');
+			predict_result_inform(predict_position, 1);
+			// Alert(" Predict correctly! \n 正确预测! <br> Next page in 2 seconds. \n 2秒后进入下一页. <br> Please wait for the dialog to disappear. <br> 请等待提示框消失.", 'bgcorrect', 'msgcorrect', 'msgtitlecorrect');
 			correct_flag = 1;
-			setTimeout("Reveal.right()",3000);
+			setTimeout("Reveal.right()",2000);
 			break;
 		}
 	}
 	if (correct_flag == 0){
-		Alert(" Predict wrongly! \n 预测错误! <br> Please sliding again. \n 请重新滑动输入.", 'bgwrong', 'msgwrong', 'msgtitlewrong');
+		predict_result_inform(predict_position, 0);
+		// Alert(" Predict wrongly! \n 预测错误! <br> Please sliding again. \n 请重新滑动输入.", 'bgwrong', 'msgwrong', 'msgtitlewrong');
 		timeout_start_input(predict_position);
 	}
    }
+
+   function predict_result_inform(predict_position, isright){
+	var div_name = "";
+	switch(predict_position){
+		case 0: div_name = "result0"; break;
+		case 1: div_name = "result1"; break;
+		case 2: div_name = "result2"; break;
+		case 3: div_name = "result3"; break;
+		case 4: div_name = "result4"; break;
+		case 5: div_name = "result5"; break;
+		case 6: div_name = "result6"; break;
+		case 7: div_name = "result7"; break;
+		case 8: div_name = "result8"; break;
+		case 9: div_name = "result9"; break;
+		case 10: div_name = "result10"; break;
+		case 11: div_name = "result11"; break;
+		case 12: div_name = "result12"; break;
+		case 13: div_name = "result13"; break;
+		case 14: div_name = "result14"; break;
+	}
+	var cc = document.getElementById(div_name);
+	// "<span style='font-size:30px; color:rgb(0,0,0);'>"
+	if (isright == 0){
+		cc.innerHTML = "Predict result:  （预测" + "<span style='font-size:30px; color:rgb(255,0,0);'>" + "错误" + "</span>，请重新输入）";
+	}else if (isright == 1){
+		cc.innerHTML = "Predict result:  （预测" + "<span style='font-size:36px; color:rgb(255,0,0);'>" + "正确" + "</span>，两秒后进入下一页）";
+	}
+   }
+
 
    var entry = (function(){
 	var prefill_str = "entry.1991227208=version&entry.87192414=is_gliding&entry.1822012518=gliding_char&entry.2043831611=input_seq&entry.1286494305=q1";
@@ -1328,7 +1359,7 @@ if(n){Xt.loop&&(t%=n,t<0&&(t=n+t)),t=Math.max(Math.min(t,n-1),0);for(var o=0;o<n
 		// document.getElementById("alertmsgDiv").appendChild(txt);    
 		document.getElementById(divmsgtype).appendChild(txt);
 		
-		window.setTimeout(function(){closeself()},3000);
+		window.setTimeout(function(){closeself()},2000);
 		// console.log("--------------------------")
 		// document.body.removeChild(document.getElementById(divbgtype));
 		// document.getElementById(divmsgtype).removeChild(document.getElementById(divmsgtitle));
