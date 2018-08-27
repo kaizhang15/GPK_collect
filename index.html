@@ -751,14 +751,18 @@ if(n){Xt.loop&&(t%=n,t<0&&(t=n+t)),t=Math.max(Math.min(t,n-1),0);for(var o=0;o<n
 			if (left == 0){
 				audio.src = './countdown_last.mp3';
 				audio.play();
+				// audio.parentNode.removeChild(element);
 			}else {
 				audio.src = './countdown_last_2s.mp3';
 				audio.play();
+				// audio.parentNode.removeChild(element);
+
 			}
 			cc.innerHTML = "倒计时：" + "<span style='font-size:36px; color:rgb(255,0,0);'>" + leftsecond + " 秒" + "</span>";
 		} else {
 			audio.src = './countdown_before_12s.mp3';
 			audio.play();
+			// audio.parentNode.removeChild(element);
 			cc.innerHTML = "倒计时：" + "<span style='font-size:30px; color:rgb(0,0,0);'>" + leftsecond + "</span>" + " 秒";
 		}
 		
@@ -1165,10 +1169,15 @@ if(n){Xt.loop&&(t%=n,t<0&&(t=n+t)),t=Math.max(Math.min(t,n-1),0);for(var o=0;o<n
 		case 14: div_name = "result14"; break;
 	}
 	var cc = document.getElementById(div_name);
+	var audio = document.createElement('video');
 	// "<span style='font-size:30px; color:rgb(0,0,0);'>"
 	if (isright == 0){
+		audio.src = "./failure.wav";
+		audio.play();
 		cc.innerHTML = "Predict result:  （预测" + "<span style='font-size:30px; color:rgb(255,0,0);'>" + "错误" + "</span>，请重新输入）";
 	}else if (isright == 1){
+		audio.src = "./success.mp3";
+		audio.play();
 		cc.innerHTML = "Predict result:  （预测" + "<span style='font-size:36px; color:rgb(255,0,0);'>" + "正确" + "</span>，两秒后进入下一页）";
 	}
    }

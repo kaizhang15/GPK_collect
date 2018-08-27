@@ -8,7 +8,7 @@ deploy: $(PUB_DIR) build
 
 $(PUB_DIR): index.html
 	@mkdir -p $(PUB_DIR)
-	-@cp -r audio/*.mp3 index.html jquery-1.11.1.min.js collect_data_style.css mobile_dev.html predict.js keyboard.min.js style.css buttons.css image/*.png keydown.wav $(PUB_DIR)/
+	-@cp -r audio/*.mp3 index.html jquery-1.11.1.min.js collect_data_style.css mobile_dev.html predict.js keyboard.min.js style.css buttons.css image/*.png audio/*.wav $(PUB_DIR)/
 	
 
 run: $(SRC_DIR)
