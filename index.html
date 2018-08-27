@@ -964,7 +964,7 @@ if(n){Xt.loop&&(t%=n,t<0&&(t=n+t)),t=Math.max(Math.min(t,n-1),0);for(var o=0;o<n
 		 if(init_time==0){ init_time =  new Date().getTime()-clock.getTime();}
 
 		  in_seq += tmp + ' ' + ch + ' Down '+ (new Date().getTime()-clock.getTime()-init_time) + ', ';
-		  console.log(tmp + ',' + ch + ',Down,'+ (new Date().getTime()-clock.getTime()-init_time) + ',');
+		//   console.log(tmp + ',' + ch + ',Down,'+ (new Date().getTime()-clock.getTime()-init_time) + ',');
 		//   mainform.input_seq.value=in_seq;
 		}
 		// file.writeln(tmp + ',Down,'+ (new Date().getTime()-clock.getTime()) + ',' + ch + ',');
@@ -993,7 +993,7 @@ if(n){Xt.loop&&(t%=n,t<0&&(t=n+t)),t=Math.max(Math.min(t,n-1),0);for(var o=0;o<n
 		}
 	   }
 	   if(tmp != undefined){
-	   console.log(tmp2 + ',' + ch + ',Up,'+ (new Date().getTime()-clock.getTime()-init_time) + ',' );
+	//    console.log(tmp2 + ',' + ch + ',Up,'+ (new Date().getTime()-clock.getTime()-init_time) + ',' );
 	   in_seq += tmp2 + ' ' + ch + ' Up '+ (new Date().getTime()-clock.getTime()-init_time) + ', ';
 	//    mainform.input_seq.value=in_seq;
 	//    unvisualize(new Array(tmp2.toString()));
@@ -1017,7 +1017,7 @@ if(n){Xt.loop&&(t%=n,t<0&&(t=n+t)),t=Math.max(Math.min(t,n-1),0);for(var o=0;o<n
         interval_time = new_time.getTime() - last_time.getTime();
         // console.log(interval_time);
         if (interval_time > 1000){
-		  console.log("x = " + predict_position);
+		//   console.log("x = " + predict_position);
           stop_input(predict_position);
           interval_time = 0;
         }
@@ -1074,12 +1074,12 @@ if(n){Xt.loop&&(t%=n,t<0&&(t=n+t)),t=Math.max(Math.min(t,n-1),0);for(var o=0;o<n
       var request_tp = new XMLHttpRequest();
       request_tp.open("POST", url_tp, true);
       
-      console.log(seq_array);
+    //   console.log(seq_array);
       request_tp.send(seq_array);
       request_tp.onreadystatechange = function(){
         if(request_tp.readyState == 4 && request_tp.status == 200){
-          console.log("success");
-          console.log(request_tp.responseText);
+        //   console.log("success");
+        //   console.log(request_tp.responseText);
         }
       }
     };
@@ -1117,16 +1117,16 @@ if(n){Xt.loop&&(t%=n,t<0&&(t=n+t)),t=Math.max(Math.min(t,n-1),0);for(var o=0;o<n
 	document.onkeyup = null;
 
 	if (length == 3){
-      console.log("---stop_function---- seq_array: " + seq_array);
+    //   console.log("---stop_function---- seq_array: " + seq_array);
 	  send_data_test();
 	  seq_array.pop();
 	  seq_array.pop();
 	  seq_array.pop();
-	  console.log("---after stop_function---- seq_array: " + seq_array);
+	//   console.log("---after stop_function---- seq_array: " + seq_array);
     }
 
-	  console.log(in_seq);
-	  console.log(result_array);
+	//   console.log(in_seq);
+	//   console.log(result_array);
 
 	if (x==2){form2.result.value = result_array}
 	switch(predict_position){
