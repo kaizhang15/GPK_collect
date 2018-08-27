@@ -8,7 +8,7 @@ deploy: $(PUB_DIR) build
 
 $(PUB_DIR): index.html
 	@mkdir -p $(PUB_DIR)
-	-@cp -r countdown_before_12s.mp3 countdown_last_2s.mp3 countdown_last.mp3 index.html jquery-1.11.1.min.js collect_data_style.css mobile_dev.html predict.js keyboard.min.js style.css buttons.css shuzhe.png pie.png heng.png hengzhe.png na.png keydown.mp3 $(PUB_DIR)/
+	-@cp -r countdown_before_12s.mp3 countdown_last_2s.mp3 countdown_last.mp3 index.html jquery-1.11.1.min.js collect_data_style.css mobile_dev.html predict.js keyboard.min.js style.css buttons.css shuzhe.png pie.png heng.png hengzhe.png na.png keydown.wav $(PUB_DIR)/
 	
 
 run: $(SRC_DIR)
