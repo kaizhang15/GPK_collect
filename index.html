@@ -746,9 +746,19 @@ if(n){Xt.loop&&(t%=n,t<0&&(t=n+t)),t=Math.max(Math.min(t,n-1),0);for(var o=0;o<n
       function down(left){
         leftsecond = left;
 		var cc = document.getElementById(divname);
+		var audio = document.createElement('video');
 		if (left <= 3){
+			if (left == 0){
+				audio.src = './countdown_last.mp3';
+				audio.play();
+			}else {
+				audio.src = './countdown_last_2s.mp3';
+				audio.play();
+			}
 			cc.innerHTML = "倒计时：" + "<span style='font-size:36px; color:rgb(255,0,0);'>" + leftsecond + " 秒" + "</span>";
 		} else {
+			audio.src = './countdown_before_12s.mp3';
+			audio.play();
 			cc.innerHTML = "倒计时：" + "<span style='font-size:30px; color:rgb(0,0,0);'>" + leftsecond + "</span>" + " 秒";
 		}
 		
